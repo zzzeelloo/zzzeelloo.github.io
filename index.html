@@ -6,495 +6,338 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Portfolio 3D interactif d'un étudiant en informatique. Projets, compétences et contact."
+      content="Portfolio d'un étudiant en informatique à l'école 42. Projets, compétences et contact."
     />
-    <link rel="stylesheet" href="./style.css" />
+    <meta name="theme-color" content="#09090b" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
-    />    
+    />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <!-- Curseur personnalisé -->
-    <div id="cursor-dot"></div>
-    <div id="cursor-outline"></div>
+    <!-- Fond animé : houle de particules 3D (canvas injecté par particle-field.js) -->
+    <div id="bg-3d" aria-hidden="true"></div>
 
-    <div class="page">
-      <header class="header">
-        <div class="logo">Zackarya<span>CHERIF</span></div>
-        <button class="nav-toggle" aria-label="Ouvrir le menu">
-          <span></span><span></span>
-        </button>
-        <nav class="nav" aria-label="Navigation principale">
-          <a href="#hero">Accueil</a>
-          <a href="#about">À propos</a>
-          <a href="#skills">Compétences</a>
-          <a href="#projects">Projets</a>
-          <a href="#contact">Contact</a>
+    <header class="header">
+      <a href="#hero" class="logo" aria-label="Retour à l'accueil">Zackarya <span>CHERIF</span></a>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span>
+      </button>
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="#hero">Accueil</a>
+        <a href="#about">À propos</a>
+        <a href="#skills">Compétences</a>
+        <a href="#projects">Projets</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ACCUEIL : hub de navigation -->
+      <section id="hero" class="hub view" data-view>
+        <div class="hub-intro">
+          <p class="hero-kicker" data-reveal>
+            <span class="status-dot"></span>Étudiant en informatique a l'école 42
+          </p>
+          <h1 class="hero-title" data-reveal>
+            Zackarya <span>CHERIF</span>
+          </h1>
+          <p class="hero-text" data-reveal>
+            Étudiant à <strong>42</strong>, je code principalement en
+            <strong>C</strong> et <strong>C++</strong> sur des projets bas
+            niveau (algorithmes, systèmes, réseau). Je crée et rénove aussi des
+            <strong>sites vitrines</strong> pour moderniser l’image de petits
+            commerces et redynamiser leur activité en ligne.
+          </p>
+          <div class="hub-actions" data-reveal>
+            <a href="#about" class="btn btn-primary btn-start" data-tour data-magnetic>
+              Get Started
+              <span class="btn-start-arrow" aria-hidden="true">→</span>
+            </a>
+            <span class="hub-hint">ou choisis une section</span>
+          </div>
+        </div>
+
+        <nav class="hub-grid" aria-label="Sections du portfolio">
+          <a href="#about" class="hub-tile spotlight" data-reveal data-magnetic>
+            <span class="hub-num">01</span>
+            <span class="hub-title">À propos</span>
+            <span class="hub-file">about.sh</span>
+            <span class="hub-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></span>
+          </a>
+          <a href="#skills" class="hub-tile spotlight" data-reveal data-magnetic>
+            <span class="hub-num">02</span>
+            <span class="hub-title">Compétences</span>
+            <span class="hub-file">skills.c</span>
+            <span class="hub-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></span>
+          </a>
+          <a href="#projects" class="hub-tile spotlight" data-reveal data-magnetic>
+            <span class="hub-num">03</span>
+            <span class="hub-title">Projets</span>
+            <span class="hub-file">Makefile</span>
+            <span class="hub-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></span>
+          </a>
+          <a href="#contact" class="hub-tile spotlight" data-reveal data-magnetic>
+            <span class="hub-num">04</span>
+            <span class="hub-title">Contact</span>
+            <span class="hub-file">main.cpp</span>
+            <span class="hub-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" /></svg></span>
+          </a>
         </nav>
-      </header>
+      </section>
 
-      <main>
-        <!-- HERO 3D -->
-        <section id="hero" class="hero">
-          <div class="hero-content">
-            <p class="hero-kicker">Étudiant en informatique a l'école 42</p>
-            <h1 class="hero-title">
-              Zackarya <span>CHERIF</span>
-            </h1>
-            <p class="hero-text">
-              Étudiant à <strong>42</strong>, je code principalement en
-              <strong>C</strong> et <strong>C++</strong> sur des projets bas
-              niveau (algorithmes, systèmes, réseau). Je crée et rénove aussi des
-              <strong>sites vitrines</strong> pour moderniser l’image de petits
-              commerces et redynamiser leur activité en ligne.
-            </p>
-            <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-              <a href="#contact" class="btn btn-ghost">Me contacter</a>
-            </div>
-          </div>
-          <div class="hero-3d-wrapper">
-            <div class="hero-code">
-              <div class="code-window">
-                <div class="code-window-header">
-                  <span class="code-dot"></span>
-                  <span class="code-dot"></span>
-                  <span class="code-dot"></span>
-                </div>
-                <div class="code-window-body">
-                  <div class="code-line code-line-comment">
-                    <span class="code-line-index">01</span>
-                    <span class="code-line-content">// Portfolio — 42 & dev web</span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">02</span>
-                    <span class="code-line-content">
-                      <span class="code-line-keyword">const</span>
-                      <span class="code-line-variable">dev</span> =
-                      <span class="code-line-value">"Zackarya"</span>;
-                    </span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">03</span>
-                    <span class="code-line-content">
-                      <span class="code-line-keyword">const</span>
-                      <span class="code-line-variable">stack</span> =
-                      <span class="code-line-value">["C", "C++", "42"]</span>;
-                    </span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">04</span>
-                    <span class="code-line-content">
-                      <span class="code-line-keyword">const</span>
-                      <span class="code-line-variable">projects</span> =
-                      <span class="code-line-value">["Libft", "minishell", "webserv", "sites vitrines"]</span>;
-                    </span>
-                  </div>
-                  <div class="code-line code-line-comment">
-                    <span class="code-line-index">05</span>
-                    <span class="code-line-content">// Exécution</span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">06</span>
-                    <span class="code-line-content">
-                      <span class="code-line-keyword">function</span>
-                      <span class="code-line-variable">run</span>(<span class="code-line-variable">task</span>) {
-                    </span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">07</span>
-                    <span class="code-line-content">
-                      &nbsp;&nbsp;<span class="code-line-keyword">return</span>
-                      <span class="code-line-variable">task</span>.<span class="code-line-variable">build</span>();
-                    </span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">08</span>
-                    <span class="code-line-content">}</span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">09</span>
-                    <span class="code-line-content">
-                      <span class="code-line-variable">projects</span>.<span class="code-line-variable">forEach</span>(<span class="code-line-variable">run</span>);
-                    </span>
-                  </div>
-                  <div class="code-line code-line-comment">
-                    <span class="code-line-index">10</span>
-                    <span class="code-line-content">// → Libft ✓ minishell ✓ webserv ✓ sites ✓</span>
-                  </div>
-                  <div class="code-line">
-                    <span class="code-line-index">11</span>
-                    <span class="code-line-content">
-                      <span class="code-line-keyword">export default</span>
-                      <span class="code-line-variable">dev</span>;
-                      <span class="code-caret"></span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- À PROPOS -->
-        <section id="about" class="section section-alt">
-          <div class="section-inner">
+      <!-- À PROPOS -->
+      <section id="about" class="section view" data-view>
+        <a href="#hero" class="view-back" data-reveal><span aria-hidden="true">←</span> Accueil</a>
+        <div class="about-intro">
+          <div class="section-head" data-reveal>
+            <p class="section-label">01</p>
             <h2>À propos de moi</h2>
-            <p>
+            <p class="section-lead">
               Je suis un <strong>étudiant en informatique</strong> passionné
               par les nouvelles tech en tout genre.
             </p>
-            <div class="about-grid">
-              <div class="about-card tilt">
-                <h3>Parcours & projets</h3>
-                <p>
-                  Formé à <strong>42</strong>, je réalise des projets en C/C++ (système,
-                  algorithmes, réseau) et je propose aussi des <strong>sites vitrines</strong>
-                  pour aider les commerces à se faire voir en ligne.
-                </p>
+          </div>
+          <div class="code-window spotlight" data-reveal>
+            <div class="code-window-header">
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-file">portfolio.cpp</span>
+            </div>
+            <div class="code-window-body">
+              <div class="code-line code-line-comment"><span class="code-line-index">01</span><span>// Portfolio — 42 & dev web</span></div>
+              <div class="code-line"><span class="code-line-index">02</span><span><span class="kw">#include</span> <span class="val">&lt;string&gt;</span></span></div>
+              <div class="code-line"><span class="code-line-index">03</span><span><span class="kw">#include</span> <span class="val">&lt;vector&gt;</span></span></div>
+              <div class="code-line"><span class="code-line-index">04</span><span><span class="kw">const</span> std::string dev = <span class="val">"Zackarya"</span>;</span></div>
+              <div class="code-line"><span class="code-line-index">05</span><span><span class="kw">const</span> std::vector&lt;std::string&gt; stack = {<span class="val">"C"</span>, <span class="val">"C++"</span>, <span class="val">"42"</span>};</span></div>
+              <div class="code-line"><span class="code-line-index">06</span><span>std::vector&lt;std::string&gt; projects = {<span class="val">"Libft"</span>, <span class="val">"minishell"</span>, <span class="val">"webserv"</span>, <span class="val">"sites vitrines"</span>};</span></div>
+              <div class="code-line code-line-comment"><span class="code-line-index">07</span><span>// Exécution</span></div>
+              <div class="code-line"><span class="code-line-index">08</span><span><span class="kw">void</span> <span class="fn">run</span>(<span class="kw">const</span> std::string&amp; task) {</span></div>
+              <div class="code-line"><span class="code-line-index">09</span><span>&nbsp;&nbsp;<span class="fn">build</span>(task);</span></div>
+              <div class="code-line"><span class="code-line-index">10</span><span>}</span></div>
+              <div class="code-line"><span class="code-line-index">11</span><span><span class="kw">int</span> <span class="fn">main</span>(<span class="kw">void</span>) {</span></div>
+              <div class="code-line"><span class="code-line-index">12</span><span>&nbsp;&nbsp;<span class="kw">for</span> (<span class="kw">const auto</span>&amp; p : projects)</span></div>
+              <div class="code-line"><span class="code-line-index">13</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">run</span>(p);</span></div>
+              <div class="code-line code-line-comment"><span class="code-line-index">14</span><span>&nbsp;&nbsp;// → Libft ✓ minishell ✓ webserv ✓ sites ✓</span></div>
+              <div class="code-line"><span class="code-line-index">15</span><span>&nbsp;&nbsp;<span class="kw">return</span> (<span class="val">0</span>);</span></div>
+              <div class="code-line"><span class="code-line-index">16</span><span>}<span class="code-caret"></span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="about-grid">
+          <div class="card spotlight" data-reveal>
+            <h3>Parcours & projets</h3>
+            <p>
+              Formé à <strong>42</strong>, je réalise des projets en C/C++ (système,
+              algorithmes, réseau) et je propose aussi des <strong>sites vitrines</strong>
+              pour aider les commerces à se faire voir en ligne.
+            </p>
+          </div>
+          <div class="card spotlight" data-reveal>
+            <h3>Langages de programmation</h3>
+            <div class="lang-gauges">
+              <div class="lang-gauge" style="--fill: 85%">
+                <div class="lang-gauge-label"><span>C</span><span>Confirmé</span></div>
+                <div class="lang-gauge-bar"><div class="lang-gauge-fill"></div></div>
               </div>
-              <div class="about-card tilt">
-                <h3>Langages de programmation</h3>
-                <div class="lang-gauges">
-                  <div class="lang-gauge">
-                    <div class="lang-gauge-label">
-                      <span>C</span>
-                      <span>Avancé</span>
-                    </div>
-                    <div class="lang-gauge-bar">
-                      <div class="lang-gauge-fill fill-100"></div>
-                    </div>
-                  </div>
-                  <div class="lang-gauge">
-                    <div class="lang-gauge-label">
-                      <span>C++</span>
-                      <span>Avancé</span>
-                    </div>
-                    <div class="lang-gauge-bar">
-                      <div class="lang-gauge-fill fill-100"></div>
-                    </div>
-                  </div>
-                  <div class="lang-gauge">
-                    <div class="lang-gauge-label">
-                      <span>Python</span>
-                      <span>Confirmé</span>
-                    </div>
-                    <div class="lang-gauge-bar">
-                      <div class="lang-gauge-fill fill-75"></div>
-                    </div>
-                  </div>
-                </div>
+              <div class="lang-gauge" style="--fill: 85%">
+                <div class="lang-gauge-label"><span>C++</span><span>Confirmé</span></div>
+                <div class="lang-gauge-bar"><div class="lang-gauge-fill"></div></div>
               </div>
-              <div class="about-card tilt">
-                <h3>Soft skills</h3>
-                <p>
-                  Curiosité, autonomie, esprit d'équipe, un vrai besoin et plaisir à
-                  apprendre de nouvelles choses.
-                </p>
+              <div class="lang-gauge" style="--fill: 55%">
+                <div class="lang-gauge-label"><span>Python</span><span>Intermédiaire</span></div>
+                <div class="lang-gauge-bar"><div class="lang-gauge-fill"></div></div>
               </div>
             </div>
           </div>
-        </section>
-
-        <!-- COMPÉTENCES -->
-        <section id="skills" class="section">
-          <div class="section-inner">
-            <h2>Compétences</h2>
-            <div class="skills-grid">
-              <article class="skill-card tilt">
-                <h3>C & algorithmie</h3>
-                <ul>
-                  <li>
-                    Libft, get_next_line, ft_printf&nbsp;: gestion de la mémoire,
-                    pointeurs, manipulation de chaînes.
-                  </li>
-                  <li>
-                    push_swap&nbsp;: conception d’algorithmes de tri efficaces avec
-                    contraintes.
-                  </li>
-                  <li>
-                    pipex, so_long, cub3d&nbsp;: travail proche du système,
-                    fichiers, affichage graphique bas niveau.
-                  </li>
-                  <li>
-                    minishell, philosophers&nbsp;: processus, concurrence, gestion
-                    des erreurs.
-                  </li>
-                </ul>
-              </article>
-              <article class="skill-card tilt">
-                <h3>Systèmes & réseau</h3>
-                <ul>
-                  <li>
-                    Born2beroot&nbsp;: installation et sécurisation d’un serveur
-                    Debian.
-                  </li>
-                  <li>
-                    NetPractice&nbsp;: adressage IP, sous-réseaux, routage de
-                    base.
-                  </li>
-                  <li>
-                    Bases de sockets et du protocole HTTP (projet webserv).
-                  </li>
-                  <li>
-                    Utilisation quotidienne de la ligne de commande Linux.
-                  </li>
-                </ul>
-              </article>
-              <article class="skill-card tilt">
-                <h3>C++ & développement logiciel</h3>
-                <ul>
-                  <li>
-                    CPP Modules 00–09&nbsp;: POO, héritage, polymorphisme,
-                    exceptions, templates.
-                  </li>
-                  <li>
-                    Architecture de serveur HTTP modulaire (webserv).
-                  </li>
-                  <li>
-                    Git / GitHub, Makefile&nbsp;: gestion de versions, builds
-                    automatisés.
-                  </li>
-                  <li>
-                    Notions en développement web et rénovation visuelle de sites
-                    (HTML/CSS, un peu de JS).
-                  </li>
-                </ul>
-              </article>
-            </div>
+          <div class="card spotlight" data-reveal>
+            <h3>Soft skills</h3>
+            <p>
+              Curiosité, autonomie, esprit d'équipe, un vrai besoin et plaisir à
+              apprendre de nouvelles choses.
+            </p>
           </div>
-        </section>
+        </div>
+        <a href="#skills" class="view-next" data-reveal data-magnetic><span class="view-next-kicker">Suivant</span><span class="view-next-title">Compétences <span aria-hidden="true">→</span></span></a>
+      </section>
 
-        <!-- PROJETS -->
-        <section id="projects" class="section section-alt">
-          <div class="section-inner">
-            <h2>Projets 42</h2>
-            <div class="projects-grid">
-              <article class="project-card tilt">
-                <div class="project-tag">Cursus 42</div>
-                <h3>Libft</h3>
-                <p>
-                  Recréation d'une bibliothèque standard C avec gestion de la mémoire
-                  et manipulation de chaînes, utilisée comme base pour les projets
-                  suivants.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Gestion mémoire</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Cursus 42</div>
-                <h3>get_next_line</h3>
-                <p>
-                  Fonction robuste de lecture ligne par ligne sur des descripteurs de
-                  fichiers, avec gestion fine des buffers.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Buffers</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Cursus 42</div>
-                <h3>ft_printf</h3>
-                <p>
-                  Re-implémentation de <code>printf</code> avec gestion de multiples
-                  conversions, flags et formatages personnalisés.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Variadic</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Système</div>
-                <h3>Born2beroot</h3>
-                <p>
-                  Mise en place d'un serveur Debian sécurisé avec gestion des
-                  utilisateurs, partitions, services et durcissement de la
-                  configuration.
-                </p>
-                <div class="project-meta">
-                  <span>Linux</span>
-                  <span>Administration</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Algorithmie</div>
-                <h3>push_swap</h3>
-                <p>
-                  Algorithmes de tri optimisés avec un nombre limité d'opérations sur
-                  deux piles, en visant un nombre de coups minimal.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Algorithmes</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Graphique</div>
-                <h3>so_long</h3>
-                <p>
-                  Petit jeu 2D utilisant la MiniLibX, gestion des collisions, des
-                  entrées clavier et d'une carte paramétrable.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>MiniLibX</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Unix</div>
-                <h3>pipex</h3>
-                <p>
-                  Reproduction du comportement des pipes Unix et de la redirection de
-                  commandes via les appels systèmes bas niveau.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Syscalls</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Shell</div>
-                <h3>minishell</h3>
-                <p>
-                  Implémentation d'un mini shell POSIX avec parsing, gestion des
-                  signaux, redirections, pipes et variables d'environnement.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Shell</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Concurrence</div>
-                <h3>philosophers</h3>
-                <p>
-                  Simulation du problème des philosophes avec threads et mutex pour
-                  gérer les accès concurrents et éviter les deadlocks.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Pthreads</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Réseau</div>
-                <h3>NetPractice</h3>
-                <p>
-                  Exercices de configuration réseau (sous-réseaux, masques, routes)
-                  pour comprendre les fondamentaux du TCP/IP.
-                </p>
-                <div class="project-meta">
-                  <span>TCP/IP</span>
-                  <span>Routage</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">3D</div>
-                <h3>cub3d</h3>
-                <p>
-                  Moteur de rendu 3D façon Wolfenstein utilisant un raycaster et la
-                  MiniLibX.
-                </p>
-                <div class="project-meta">
-                  <span>C</span>
-                  <span>Raycasting</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">C++</div>
-                <h3>CPP Modules 00–04</h3>
-                <p>
-                  Introduction aux bases de la POO en C++ : classes, héritage,
-                  polymorphisme, orthodox canonical form.
-                </p>
-                <div class="project-meta">
-                  <span>C++</span>
-                  <span>OOP</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">C++</div>
-                <h3>CPP Modules 05–09</h3>
-                <p>
-                  Approfondissement : templates, exceptions, containers, opérateurs
-                  surchargés et bonnes pratiques modernes.
-                </p>
-                <div class="project-meta">
-                  <span>C++</span>
-                  <span>Templates</span>
-                </div>
-              </article>
-              <article class="project-card tilt">
-                <div class="project-tag">Web</div>
-                <h3>webserv</h3>
-                <p>
-                  Serveur HTTP inspiré de Nginx, capable de gérer plusieurs
-                  connexions simultanées et la configuration par fichiers.
-                </p>
-                <div class="project-meta">
-                  <span>C++</span>
-                  <span>HTTP</span>
-                </div>
-              </article>
-            </div>
+      <!-- COMPÉTENCES -->
+      <section id="skills" class="section view" data-view>
+        <a href="#hero" class="view-back" data-reveal><span aria-hidden="true">←</span> Accueil</a>
+        <div class="section-head" data-reveal>
+          <p class="section-label">02</p>
+          <h2>Compétences</h2>
+        </div>
+        <div class="skills-grid">
+          <article class="card spotlight skill-card" data-reveal>
+            <h3>C & algorithmie</h3>
+            <ul>
+              <li>Libft, get_next_line, ft_printf&nbsp;: gestion de la mémoire, pointeurs, manipulation de chaînes.</li>
+              <li>push_swap&nbsp;: conception d’algorithmes de tri efficaces avec contraintes.</li>
+              <li>pipex, so_long, cub3d&nbsp;: travail proche du système, fichiers, affichage graphique bas niveau.</li>
+              <li>minishell, philosophers&nbsp;: processus, concurrence, gestion des erreurs.</li>
+            </ul>
+          </article>
+          <article class="card spotlight skill-card" data-reveal>
+            <h3>Systèmes & réseau</h3>
+            <ul>
+              <li>Born2beroot&nbsp;: installation et sécurisation d’un serveur Debian.</li>
+              <li>NetPractice&nbsp;: adressage IP, sous-réseaux, routage de base.</li>
+              <li>Bases de sockets et du protocole HTTP (projet webserv).</li>
+              <li>Utilisation quotidienne de la ligne de commande Linux.</li>
+            </ul>
+          </article>
+          <article class="card spotlight skill-card" data-reveal>
+            <h3>C++ & développement logiciel</h3>
+            <ul>
+              <li>CPP Modules 00–09&nbsp;: POO, héritage, polymorphisme, exceptions, templates.</li>
+              <li>Architecture de serveur HTTP modulaire (webserv).</li>
+              <li>Git / GitHub, Makefile&nbsp;: gestion de versions, builds automatisés.</li>
+              <li>Notions en développement web et rénovation visuelle de sites (HTML/CSS, un peu de JS).</li>
+            </ul>
+          </article>
+        </div>
+        <a href="#projects" class="view-next" data-reveal data-magnetic><span class="view-next-kicker">Suivant</span><span class="view-next-title">Projets <span aria-hidden="true">→</span></span></a>
+      </section>
+
+      <!-- PROJETS -->
+      <section id="projects" class="section view" data-view>
+        <a href="#hero" class="view-back" data-reveal><span aria-hidden="true">←</span> Accueil</a>
+        <div class="section-head" data-reveal>
+          <p class="section-label">03</p>
+          <h2>Projets 42</h2>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Cursus 42</div>
+            <h3>Libft</h3>
+            <p>Recréation d'une bibliothèque standard C avec gestion de la mémoire et manipulation de chaînes, utilisée comme base pour les projets suivants.</p>
+            <div class="project-meta"><span>C</span><span>Gestion mémoire</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Cursus 42</div>
+            <h3>get_next_line</h3>
+            <p>Fonction robuste de lecture ligne par ligne sur des descripteurs de fichiers, avec gestion fine des buffers.</p>
+            <div class="project-meta"><span>C</span><span>Buffers</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Cursus 42</div>
+            <h3>ft_printf</h3>
+            <p>Re-implémentation de <code>printf</code> avec gestion de multiples conversions, flags et formatages personnalisés.</p>
+            <div class="project-meta"><span>C</span><span>Variadic</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Système</div>
+            <h3>Born2beroot</h3>
+            <p>Mise en place d'un serveur Debian sécurisé avec gestion des utilisateurs, partitions, services et durcissement de la configuration.</p>
+            <div class="project-meta"><span>Linux</span><span>Administration</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Algorithmie</div>
+            <h3>push_swap</h3>
+            <p>Algorithmes de tri optimisés avec un nombre limité d'opérations sur deux piles, en visant un nombre de coups minimal.</p>
+            <div class="project-meta"><span>C</span><span>Algorithmes</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Graphique</div>
+            <h3>so_long</h3>
+            <p>Petit jeu 2D utilisant la MiniLibX, gestion des collisions, des entrées clavier et d'une carte paramétrable.</p>
+            <div class="project-meta"><span>C</span><span>MiniLibX</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Unix</div>
+            <h3>pipex</h3>
+            <p>Reproduction du comportement des pipes Unix et de la redirection de commandes via les appels systèmes bas niveau.</p>
+            <div class="project-meta"><span>C</span><span>Syscalls</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Shell</div>
+            <h3>minishell</h3>
+            <p>Implémentation d'un mini shell POSIX avec parsing, gestion des signaux, redirections, pipes et variables d'environnement.</p>
+            <div class="project-meta"><span>C</span><span>Shell</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Concurrence</div>
+            <h3>philosophers</h3>
+            <p>Simulation du problème des philosophes avec threads et mutex pour gérer les accès concurrents et éviter les deadlocks.</p>
+            <div class="project-meta"><span>C</span><span>Pthreads</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Réseau</div>
+            <h3>NetPractice</h3>
+            <p>Exercices de configuration réseau (sous-réseaux, masques, routes) pour comprendre les fondamentaux du TCP/IP.</p>
+            <div class="project-meta"><span>TCP/IP</span><span>Routage</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">3D</div>
+            <h3>cub3d</h3>
+            <p>Moteur de rendu 3D façon Wolfenstein utilisant un raycaster et la MiniLibX.</p>
+            <div class="project-meta"><span>C</span><span>Raycasting</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">C++</div>
+            <h3>CPP Modules 00–04</h3>
+            <p>Introduction aux bases de la POO en C++ : classes, héritage, polymorphisme, orthodox canonical form.</p>
+            <div class="project-meta"><span>C++</span><span>OOP</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">C++</div>
+            <h3>CPP Modules 05–09</h3>
+            <p>Approfondissement : templates, exceptions, containers, opérateurs surchargés et bonnes pratiques modernes.</p>
+            <div class="project-meta"><span>C++</span><span>Templates</span></div>
+          </article>
+          <article class="project-card spotlight" data-reveal>
+            <div class="project-tag">Web</div>
+            <h3>webserv</h3>
+            <p>Serveur HTTP inspiré de Nginx, capable de gérer plusieurs connexions simultanées et la configuration par fichiers.</p>
+            <div class="project-meta"><span>C++</span><span>HTTP</span></div>
+          </article>
+        </div>
+        <a href="#contact" class="view-next" data-reveal data-magnetic><span class="view-next-kicker">Suivant</span><span class="view-next-title">Contact <span aria-hidden="true">→</span></span></a>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section view" data-view>
+        <a href="#hero" class="view-back" data-reveal><span aria-hidden="true">←</span> Accueil</a>
+        <div class="contact-inner">
+          <div class="section-head" data-reveal>
+            <p class="section-label">04</p>
+            <h2>Contact</h2>
+            <p class="section-lead">
+              Tu veux discuter d'un projet, simplement parler
+              tech&nbsp;? Écris-moi.
+            </p>
           </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact" class="section">
-          <div class="section-inner contact-inner">
-            <div>
-              <h2>Contact</h2>
-              <p>
-                Tu veux discuter d'un projet, simplement parler
-                tech&nbsp;? Écris-moi.
-              </p>
+          <form class="contact-form card" data-formspree-id="xkovapwr" data-reveal>
+            <div class="field">
+              <label for="name">Nom</label>
+              <input id="name" type="text" placeholder="Ton nom" autocomplete="name" required />
             </div>
-            <form class="contact-form" data-formspree-id="xkovapwr">
-              <div class="field">
-                <label for="name">Nom</label>
-                <input id="name" type="text" placeholder="Ton nom" required />
-              </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="ton.mail@exemple.com"
-                  required
-                />
-              </div>
-              <div class="field">
-                <label for="message">Message</label>
-                <textarea
-                  id="message"
-                  rows="4"
-                  placeholder="Dis m'en plus sur ton projet..."
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" id="contact-submit">
-                Envoyer
-              </button>
-              <p class="contact-feedback" id="contact-feedback" aria-live="polite" hidden></p>
-            </form>
-          </div>
-        </section>
-      </main>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="ton.mail@exemple.com" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" rows="4" placeholder="Dis m'en plus sur ton projet..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="contact-submit">Envoyer</button>
+            <p class="contact-feedback" id="contact-feedback" aria-live="polite" hidden></p>
+          </form>
+        </div>
+        <a href="#hero" class="view-next" data-reveal data-magnetic><span class="view-next-kicker">Retour</span><span class="view-next-title">Accueil <span aria-hidden="true">→</span></span></a>
+      </section>
+    </main>
 
-      <footer class="footer">
-        <p>© <span id="year"></span> - CHERIF Zackarya. Tous droits réservés.</p>
-      </footer>
-    </div>
+    <footer class="footer">
+      <p>© <span id="year"></span> - CHERIF Zackarya. Tous droits réservés.</p>
+    </footer>
 
+    <script src="./particle-field.js"></script>
     <script src="./main.js"></script>
   </body>
 </html>
-
