@@ -114,7 +114,7 @@
               <div class="code-line"><span class="code-line-index">03</span><span><span class="kw">#include</span> <span class="val">&lt;vector&gt;</span></span></div>
               <div class="code-line"><span class="code-line-index">04</span><span><span class="kw">const</span> std::string dev = <span class="val">"Zackarya"</span>;</span></div>
               <div class="code-line"><span class="code-line-index">05</span><span><span class="kw">const</span> std::vector&lt;std::string&gt; stack = {<span class="val">"C"</span>, <span class="val">"C++"</span>, <span class="val">"42"</span>};</span></div>
-              <div class="code-line"><span class="code-line-index">06</span><span>std::vector&lt;std::string&gt; projects = {<span class="val">"Libft"</span>, <span class="val">"minishell"</span>, <span class="val">"webserv"</span>, <span class="val">"sites vitrines"</span>};</span></div>
+              <div class="code-line"><span class="code-line-index">06</span><span>std::vector&lt;std::string&gt; projects = {<span class="val">"Libft"</span>, <span class="val">"minishell"</span>, <span class="val">"ft_irc"</span>, <span class="val">"sites vitrines"</span>};</span></div>
               <div class="code-line code-line-comment"><span class="code-line-index">07</span><span>// Exécution</span></div>
               <div class="code-line"><span class="code-line-index">08</span><span><span class="kw">void</span> <span class="fn">run</span>(<span class="kw">const</span> std::string&amp; task) {</span></div>
               <div class="code-line"><span class="code-line-index">09</span><span>&nbsp;&nbsp;<span class="fn">build</span>(task);</span></div>
@@ -122,7 +122,7 @@
               <div class="code-line"><span class="code-line-index">11</span><span><span class="kw">int</span> <span class="fn">main</span>(<span class="kw">void</span>) {</span></div>
               <div class="code-line"><span class="code-line-index">12</span><span>&nbsp;&nbsp;<span class="kw">for</span> (<span class="kw">const auto</span>&amp; p : projects)</span></div>
               <div class="code-line"><span class="code-line-index">13</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">run</span>(p);</span></div>
-              <div class="code-line code-line-comment"><span class="code-line-index">14</span><span>&nbsp;&nbsp;// → Libft ✓ minishell ✓ webserv ✓ sites ✓</span></div>
+              <div class="code-line code-line-comment"><span class="code-line-index">14</span><span>&nbsp;&nbsp;// → Libft ✓ minishell ✓ ft_irc ✓ sites ✓</span></div>
               <div class="code-line"><span class="code-line-index">15</span><span>&nbsp;&nbsp;<span class="kw">return</span> (<span class="val">0</span>);</span></div>
               <div class="code-line"><span class="code-line-index">16</span><span>}<span class="code-caret"></span></span></div>
             </div>
@@ -187,7 +187,7 @@
             <ul>
               <li>Born2beroot&nbsp;: installation et sécurisation d’un serveur Debian.</li>
               <li>NetPractice&nbsp;: adressage IP, sous-réseaux, routage de base.</li>
-              <li>Bases de sockets et du protocole HTTP (projet webserv).</li>
+              <li>Sockets, multiplexage avec poll() et protocole IRC (projet ft_irc).</li>
               <li>Utilisation quotidienne de la ligne de commande Linux.</li>
             </ul>
           </article>
@@ -195,7 +195,7 @@
             <h3>C++ & développement logiciel</h3>
             <ul>
               <li>CPP Modules 00–09&nbsp;: POO, héritage, polymorphisme, exceptions, templates.</li>
-              <li>Architecture de serveur HTTP modulaire (webserv).</li>
+              <li>Architecture de serveur IRC en C++98 : clients, canaux, commandes (ft_irc).</li>
               <li>Git / GitHub, Makefile&nbsp;: gestion de versions, builds automatisés.</li>
               <li>Notions en développement web et rénovation visuelle de sites (HTML/CSS, un peu de JS).</li>
             </ul>
@@ -291,10 +291,10 @@
             <div class="project-meta"><span>C++</span><span>Templates</span></div>
           </article>
           <article class="project-card spotlight" data-reveal>
-            <div class="project-tag">Web</div>
-            <h3>webserv</h3>
-            <p>Serveur HTTP inspiré de Nginx, capable de gérer plusieurs connexions simultanées et la configuration par fichiers.</p>
-            <div class="project-meta"><span>C++</span><span>HTTP</span></div>
+            <div class="project-tag">Réseau</div>
+            <h3>ft_irc</h3>
+            <p>Serveur IRC en C++98 compatible avec un vrai client (irssi, HexChat) : authentification, canaux, messages privés et commandes opérateur (KICK, INVITE, TOPIC, MODE), avec des sockets non bloquants gérés par poll().</p>
+            <div class="project-meta"><span>C++</span><span>Sockets</span><span>IRC</span></div>
           </article>
         </div>
         <a href="#contact" class="view-next" data-reveal data-magnetic><span class="view-next-kicker">Suivant</span><span class="view-next-title">Contact <span aria-hidden="true">→</span></span></a>

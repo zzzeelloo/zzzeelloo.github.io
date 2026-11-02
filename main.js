@@ -172,9 +172,9 @@ document.documentElement.classList.add("js");
     contact: {
       file: "main.cpp",
       lines: [
-        { kind: "code", text: 'Server("contact.conf").listen();' },
-        { kind: "cmd", text: "./webserv contact.conf" },
-        { kind: "out", text: "en écoute — prêt à recevoir ton message" },
+        { kind: "code", text: 'Server(6667, "contact").run();' },
+        { kind: "cmd", text: "./ircserv 6667 contact" },
+        { kind: "out", text: "en écoute sur le port 6667 — prêt à recevoir ton message" },
       ],
     },
   };
